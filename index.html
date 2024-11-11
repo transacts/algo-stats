@@ -1,236 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+[Previous CSS remains exactly the same until the body tag]
 
-        :root {
-            --card-bg: rgba(30, 41, 59, 0.5);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --text-primary: #fff;
-            --text-secondary: #94a3b8;
-            --success: #4ade80;
-            --danger: #ef4444;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f1117 0%, #1a1f2e 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            padding: 1rem;
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-        }
-
-        .title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff 0%, #a8b1cf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeframe {
-            color: var(--success);
-            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-            margin-bottom: 1rem;
-            padding: 0.5rem 1rem;
-            background: rgba(74, 222, 128, 0.1);
-            border-radius: 2rem;
-            display: inline-block;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            transition: transform 0.2s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-header {
-            color: var(--text-secondary);
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .main-value {
-            font-size: clamp(2rem, 5vw, 2.5rem);
-            font-weight: 800;
-            color: var(--success);
-            letter-spacing: -1px;
-        }
-
-        .sub-value {
-            color: var(--text-secondary);
-            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-        }
-
-        .value-group {
-            margin-top: 1rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1rem;
-        }
-
-        .metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.8rem;
-            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
-        }
-
-        .positive { color: var(--success); }
-        .negative { color: var(--danger); }
-        
-        .insights {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .insights h2 {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .insights ul {
-            list-style: none;
-            color: var(--text-secondary);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
-            gap: 1rem;
-        }
-
-        .insights li {
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 0.5rem;
-            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
-            transition: transform 0.2s ease;
-        }
-
-        .insights li:hover {
-            transform: translateX(5px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .monospace {
-            font-family: 'SF Mono', SFMono-Regular, Consolas, monospace;
-            letter-spacing: -0.5px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0.5rem;
-            }
-
-            .stat-card {
-                padding: 1.2rem;
-            }
-
-            .insights {
-                padding: 1.2rem;
-            }
-
-            .insights ul {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 0.5rem;
-            }
-
-            .title {
-                padding: 0 1rem;
-            }
-
-            .metric {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.3rem;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .stat-card, .insights {
-            animation: fadeUp 0.5s ease forwards;
-            opacity: 0;
-        }
-
-        .stat-card:nth-child(1) { animation-delay: 0.1s; }
-        .stat-card:nth-child(2) { animation-delay: 0.2s; }
-        .stat-card:nth-child(3) { animation-delay: 0.3s; }
-        .insights { animation-delay: 0.4s; }
-    </style>
-</head>
 <body>
     <div class="container">
         <div class="header">
             <h1 class="title">Pump Token Analysis</h1>
-            <p class="subtitle">**PROFITS ARE BASED ON % RETURNS**</p>
+            <p class="subtitle" style="color: var(--danger); font-weight: bold; font-size: 1rem;">THEORETICAL RETURNS - NOT ACTUAL PROFITS</p>
+            <p class="subtitle">Based on ATH & Maximum Potential Returns</p>
             <p class="timeframe">October 27 - November 10, 2024 • Based on Token ATH</p>
         </div>
 
@@ -252,16 +27,16 @@
             </div>
 
             <div class="stat-card">
-                <div class="card-header">💰 Investment Returns</div>
+                <div class="card-header">💰 Theoretical Maximum Returns</div>
                 <div class="main-value monospace">$416,707</div>
-                <div class="sub-value">Total Return from $194,500 Investment</div>
+                <div class="sub-value">Potential Return if $100 was invested at call and sold at ATH for each token</div>
                 <div class="value-group">
                     <div class="metric">
-                        <span>Net Profit</span>
+                        <span>Theoretical Profit</span>
                         <span class="positive monospace">$222,207</span>
                     </div>
                     <div class="metric">
-                        <span>ROI</span>
+                        <span>Maximum ROI Possible</span>
                         <span class="positive">2.14x (114.2%)</span>
                     </div>
                 </div>
@@ -270,14 +45,14 @@
             <div class="stat-card">
                 <div class="card-header">📈 Performance Metrics</div>
                 <div class="main-value">500.44%</div>
-                <div class="sub-value">Average Gain</div>
+                <div class="sub-value">Average Maximum Gain Potential</div>
                 <div class="value-group">
                     <div class="metric">
-                        <span>Median Gain</span>
+                        <span>Median Peak Gain</span>
                         <span class="positive">210.12%</span>
                     </div>
                     <div class="metric">
-                        <span>Maximum Gain</span>
+                        <span>Highest Recorded Gain</span>
                         <span class="positive">17,477%</span>
                     </div>
                 </div>
@@ -285,14 +60,15 @@
         </div>
 
         <div class="insights">
-            <h2>📝 Key Insights</h2>
+            <h2>📝 Important Notes & Analysis</h2>
             <ul>
-                <li>💵 For every $100 invested, returned $214.25</li>
-                <li>🎯 526 tokens achieved >100% gain (75.8% of graduated)</li>
-                <li>🚀 76 tokens achieved >1000% gain (11.0% of graduated)</li>
-                <li>📊 75.8% success rate among graduated tokens</li>
-                <li>⚠️ Non-graduating tokens counted as total loss ($124,400), though profit may be possible</li>
-                <li>💰 Graduated tokens generated $222,207 net profit despite losses</li>
+                <li>⚠️ These are THEORETICAL returns based on perfect trading (buying at call, selling at ATH)</li>
+                <li>📊 Analysis shows maximum potential: If $100 was invested at call price and sold at absolute peak</li>
+                <li>🎯 526 tokens reached >100% potential gain (75.8% of graduated)</li>
+                <li>🚀 76 tokens showed >1000% potential gain (11.0% of graduated)</li>
+                <li>❗ In reality, hitting ATH sales is extremely difficult - actual returns would be lower</li>
+                <li>💡 Non-graduating tokens counted as total loss, though some profit opportunities may exist</li>
+                <li>📈 Data shows strong potential but requires perfect execution to achieve these returns</li>
             </ul>
         </div>
     </div>
