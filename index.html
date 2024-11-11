@@ -46,13 +46,13 @@
             background: linear-gradient(135deg, #fff 0%, #a8b1cf 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
 
         .subtitle {
-            color: var(--danger);
+            color: var(--text-secondary);
             font-size: clamp(0.9rem, 2vw, 1rem);
             margin-bottom: 0.5rem;
-            font-weight: bold;
         }
 
         .timeframe {
@@ -80,8 +80,8 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            backdrop-filter: blur(10px);
             transition: transform 0.2s ease;
+            backdrop-filter: blur(10px);
         }
 
         .stat-card:hover {
@@ -90,21 +90,22 @@
 
         .card-header {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2vw, 1rem);
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
         .main-value {
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 5vw, 2.5rem);
             font-weight: 800;
             color: var(--success);
+            letter-spacing: -1px;
         }
 
         .sub-value {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
         }
 
         .value-group {
@@ -118,11 +119,12 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0.8rem;
+            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
         }
 
         .positive { color: var(--success); }
         .negative { color: var(--danger); }
-
+        
         .insights {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -135,41 +137,103 @@
         .insights h2 {
             color: var(--text-secondary);
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .insights ul {
             list-style: none;
             color: var(--text-secondary);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+            gap: 1rem;
         }
 
         .insights li {
             padding: 1rem;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+            transition: transform 0.2s ease;
         }
 
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            color: var(--danger);
+        .insights li:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .monospace {
             font-family: 'SF Mono', SFMono-Regular, Consolas, monospace;
+            letter-spacing: -0.5px;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .stat-card {
+                padding: 1.2rem;
+            }
+
+            .insights {
+                padding: 1.2rem;
+            }
+
+            .insights ul {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .title {
+                padding: 0 1rem;
+            }
+
+            .metric {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card, .insights {
+            animation: fadeUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .insights { animation-delay: 0.4s; }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <h1 class="title">Pump Token Analysis</h1>
-            <p class="subtitle">THEORETICAL RETURNS - NOT ACTUAL PROFITS</p>
-            <p class="timeframe">Based on Perfect ATH Execution</p>
+            <p class="subtitle" style="color: var(--danger); font-weight: bold; font-size: 1rem;">THEORETICAL RETURNS - NOT ACTUAL PROFITS</p>
+            <p class="subtitle">Based on ATH & Maximum Potential Returns</p>
+            <p class="timeframe">October 27 - November 10, 2024 • Based on Token ATH</p>
         </div>
 
         <div class="stats-grid">
@@ -190,17 +254,21 @@
             </div>
 
             <div class="stat-card">
-                <div class="card-header">💰 Investment Returns</div>
-                <div class="main-value monospace">$614,922</div>
-                <div class="sub-value">Total Return from $187,700 Investment</div>
+                <div class="card-header">💰 Theoretical Maximum Returns</div>
+                <div class="main-value monospace">$625,597</div>
+                <div class="sub-value">Potential Return if $100 was invested at call and sold at ATH for each token</div>
                 <div class="value-group">
                     <div class="metric">
-                        <span>Net Profit</span>
-                        <span class="positive monospace">$427,222</span>
+                        <span>Total Investment</span>
+                        <span class="monospace">$187,700</span>
                     </div>
                     <div class="metric">
-                        <span>Money Multiplier</span>
-                        <span class="positive">3.28x (227.6%)</span>
+                        <span>Theoretical Profit</span>
+                        <span class="positive monospace">$437,897</span>
+                    </div>
+                    <div class="metric">
+                        <span>Maximum ROI Possible</span>
+                        <span class="positive">3.33x (233%)</span>
                     </div>
                 </div>
             </div>
@@ -208,14 +276,14 @@
             <div class="stat-card">
                 <div class="card-header">📈 Performance Metrics</div>
                 <div class="main-value">527.47%</div>
-                <div class="sub-value">Average Gain (Graduated Only)</div>
+                <div class="sub-value">Average Maximum Gain Potential</div>
                 <div class="value-group">
                     <div class="metric">
-                        <span>Median Gain</span>
+                        <span>Median Peak Gain</span>
                         <span class="positive">210.99%</span>
                     </div>
                     <div class="metric">
-                        <span>Maximum Gain</span>
+                        <span>Highest Recorded Gain</span>
                         <span class="positive">19,696%</span>
                     </div>
                 </div>
@@ -223,13 +291,15 @@
         </div>
 
         <div class="insights">
-            <h2>📝 Key Insights</h2>
+            <h2>📝 Important Notes & Analysis</h2>
             <ul>
-                <li>💵 For every $100 invested, returned $327.61</li>
-                <li>🎯 743 tokens achieved >100% gain (75.8% of graduated)</li>
-                <li>🚀 114 tokens achieved >1000% gain (11.6% of graduated)</li>
-                <li>💰 Despite $88,000 lost on failed tokens, successful ones generated $427,222 net profit</li>
-                <li class="warning">⚠️ NOTE: Non-graduating tokens counted as total loss, though profit may be possible</li>
+                <li>⚠️ These are THEORETICAL returns based on perfect trading (buying at call, selling at ATH)</li>
+                <li>📊 If $100 invested per token: $333 returned on average with perfect execution</li>
+                <li>🎯 743 tokens reached >100% potential gain (75.8% of graduated)</li>
+                <li>🚀 114 tokens showed >1000% potential gain (11.6% of graduated)</li>
+                <li>❗ In reality, hitting ATH sales is extremely difficult - actual returns would be lower</li>
+                <li>💡 Complete loss assumed on non-graduating tokens ($88,000), though profit is very possible</li>
+                <li>📈 Even with 880 total losses, graduated tokens could theoretically generate $437,897 profit</li>
             </ul>
         </div>
     </div>
